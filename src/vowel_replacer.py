@@ -17,7 +17,7 @@ def replace_vowels(input_string):
         >>> replace_vowels("Python")
         'Pythun'
     """
-    # Define vowel mappings for lowercase and uppercase
+    # Define specific vowel mappings for lowercase and uppercase
     vowel_map_lower = {'a': 'e', 'e': 'i', 'i': 'o', 'o': 'u', 'u': 'a'}
     vowel_map_upper = {'A': 'E', 'E': 'I', 'I': 'O', 'O': 'U', 'U': 'A'}
     
