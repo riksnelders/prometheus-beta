@@ -11,6 +11,9 @@ def is_palindrome(s: str) -> bool:
     Returns:
         bool: True if the string is a palindrome, False otherwise
     
+    Raises:
+        TypeError: If input is not a string
+    
     Examples:
         >>> is_palindrome("A man a plan a canal Panama")
         True
@@ -19,6 +22,14 @@ def is_palindrome(s: str) -> bool:
         >>> is_palindrome("Was it a car or a cat I saw?")
         True
     """
+    # Check for None or non-string input
+    if s is None:
+        return False
+    
+    # Ensure input is a string
+    if not isinstance(s, str):
+        raise TypeError("Input must be a string")
+    
     # Remove non-alphanumeric characters and convert to lowercase
     cleaned_str = ''.join(char.lower() for char in s if char.isalnum())
     
