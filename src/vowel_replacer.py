@@ -17,28 +17,22 @@ def replace_vowels(input_string):
         >>> replace_vowels("Python")
         'Pythun'
     """
-    # Define vowel sequences (lowercase and uppercase)
-    vowels_lower = 'aeiou'
-    vowels_upper = 'AEIOU'
+    # Define vowel mappings for lowercase and uppercase
+    vowel_map_lower = {'a': 'e', 'e': 'i', 'i': 'o', 'o': 'u', 'u': 'a'}
+    vowel_map_upper = {'A': 'E', 'E': 'I', 'I': 'O', 'O': 'U', 'U': 'A'}
     
     # Create result list to build the new string
     result = []
     
     # Iterate through each character in the input string
     for char in input_string:
-        # Check if lowercase vowel
-        if char in vowels_lower:
-            # Find current index and replace with next vowel (wrapping around)
-            current_index = vowels_lower.index(char)
-            next_index = (current_index + 1) % len(vowels_lower)
-            result.append(vowels_lower[next_index])
+        # Replace lowercase vowels
+        if char in vowel_map_lower:
+            result.append(vowel_map_lower[char])
         
-        # Check if uppercase vowel
-        elif char in vowels_upper:
-            # Find current index and replace with next vowel (wrapping around)
-            current_index = vowels_upper.index(char)
-            next_index = (current_index + 1) % len(vowels_upper)
-            result.append(vowels_upper[next_index])
+        # Replace uppercase vowels
+        elif char in vowel_map_upper:
+            result.append(vowel_map_upper[char])
         
         # If not a vowel, keep the original character
         else:
