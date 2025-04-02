@@ -35,11 +35,9 @@ def test_edge_cases():
     assert is_palindrome(" ") == True  # single space
     assert is_palindrome("!@#$%^&*()") == True  # only non-alphanumeric
     assert is_palindrome("a") == True  # single character
-    assert is_palindrome(None) == False  # None input
-    
+
 def test_non_string_input():
     """Test non-string inputs"""
     with pytest.raises(TypeError):
         is_palindrome(12345)
-    with pytest.raises(TypeError):
-        is_palindrome(None)
+    assert is_palindrome(None) == False
