@@ -22,6 +22,10 @@ def is_palindrome(s: str) -> bool:
         >>> is_palindrome("Was it a car or a cat I saw?")
         True
     """
+    # Handle None input 
+    if s is None:
+        return False
+    
     # Raise TypeError for non-string input
     if not isinstance(s, str):
         raise TypeError("Input must be a string")
