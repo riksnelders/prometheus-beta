@@ -40,6 +40,9 @@ def palindrome_pair(nums):
     if not all(isinstance(x, (int, float)) for x in nums):
         raise ValueError("List must contain only numeric elements")
     
+    # Track if a palindrome difference has been found
+    palindrome_diff_exists = False
+    
     # Check all possible pairs
     for i in range(len(nums)):
         for j in range(i+1, len(nums)):
@@ -48,6 +51,6 @@ def palindrome_pair(nums):
             
             # Check if difference is a palindrome
             if is_palindrome(diff):
-                return True
+                palindrome_diff_exists = True
     
-    return False
+    return palindrome_diff_exists
