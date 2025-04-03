@@ -30,22 +30,22 @@ def count_equal_sum_partitions(numbers: List[int]) -> int:
     half_sum = total_sum // 2
     n = len(numbers)
     
-    # Dynamic programming solution
-    # dp[i][j] stores the number of subsets of first i numbers that sum to j
-    dp = [[0] * (half_sum + 1) for _ in range(n + 1)]
+    # Store unique valid partitions to avoid duplicates
+    unique_partitions = set()
     
-    # Base case: zero sum is always possible (empty subset)
-    for i in range(n + 1):
-        dp[i][0] = 1
+    # Try all possible subset combinations
+    for r in range(1, n // 2 + 1):
+        for subset in combinations(numbers, r):
+            # If this subset sums to half, check complement
+            if sum(subset) == half_sum:
+                complement = tuple(x for x in numbers if x not in subset)
+                if sum(complement) == half_sum:
+                    # Sort to avoid duplicate counting
+                    partition = tuple(sorted(subset))
+                    complement_sorted = tuple(sorted(complement))
+                    
+                    # Add the partition or its complement to ensure uniqueness
+                    unique_partitions.add(partition)
+                    unique_partitions.add(complement_sorted)
     
-    # Fill DP table
-    for i in range(1, n + 1):
-        for j in range(1, half_sum + 1):
-            # Don't include current number
-            dp[i][j] = dp[i-1][j]
-            
-            # Include current number if it doesn't exceed current sum
-            if numbers[i-1] <= j:
-                dp[i][j] += dp[i-1][j - numbers[i-1]]
-    
-    return dp[n][half_sum] // 2
+    return len(unique_partitions) // 2
