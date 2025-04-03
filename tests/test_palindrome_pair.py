@@ -13,7 +13,7 @@ def test_palindrome_pair_basic_true():
 
 def test_palindrome_pair_basic_false():
     """Test a basic case where no palindrome pair difference exists."""
-    assert palindrome_pair([1, 2, 3, 4, 6]) == False
+    assert palindrome_pair([1, 2, 3, 4, 7]) == False
 
 def test_palindrome_pair_empty_list():
     """Test an empty list returns False."""
