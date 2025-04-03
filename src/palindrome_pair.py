@@ -8,7 +8,7 @@ def is_palindrome(num):
     Returns:
         bool: True if the number is a palindrome, False otherwise.
     """
-    return str(num) == str(num)[::-1]
+    return str(int(abs(num))) == str(int(abs(num)))[::-1]
 
 def palindrome_pair(nums):
     """
@@ -16,7 +16,7 @@ def palindrome_pair(nums):
     whose difference is a palindrome.
     
     Args:
-        nums (list): A sorted list of integers.
+        nums (list): A sorted list of integers or floats.
     
     Returns:
         bool: True if a palindrome pair difference exists, False otherwise.
