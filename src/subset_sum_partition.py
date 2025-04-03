@@ -16,8 +16,8 @@ def count_equal_sum_partitions(numbers: List[int]) -> int:
         ValueError: If the input list is empty or None.
     """
     # Strict validation
-    if numbers is None:
-        raise ValueError("Input list cannot be None")
+    if numbers is None or len(numbers) == 0:
+        raise ValueError("Input list cannot be None or empty")
     
     if len(numbers) <= 1:
         return 0
@@ -28,25 +28,24 @@ def count_equal_sum_partitions(numbers: List[int]) -> int:
         return 0
     
     half_sum = total_sum // 2
-    partition_count = 0
+    n = len(numbers)
     
-    # Use set for tracking to avoid duplicates
-    unique_partitions = set()
+    # Dynamic programming solution
+    # dp[i][j] stores the number of subsets of first i numbers that sum to j
+    dp = [[0] * (half_sum + 1) for _ in range(n + 1)]
     
-    # Start with smaller subsets to improve efficiency
-    for r in range(1, len(numbers) // 2 + 1):
-        for subset in combinations(numbers, r):
-            # Skip if this subset sum isn't half the total
-            if sum(subset) != half_sum:
-                continue
+    # Base case: zero sum is always possible (empty subset)
+    for i in range(n + 1):
+        dp[i][0] = 1
+    
+    # Fill DP table
+    for i in range(1, n + 1):
+        for j in range(1, half_sum + 1):
+            # Don't include current number
+            dp[i][j] = dp[i-1][j]
             
-            # Create complement subset
-            complement = tuple(x for x in numbers if x not in subset)
-            
-            # Verify complement sums to half_sum too
-            if sum(complement) == half_sum:
-                # Sort to avoid duplicates and handle same partitions from different views
-                partition = tuple(sorted(subset))
-                unique_partitions.add(partition)
+            # Include current number if it doesn't exceed current sum
+            if numbers[i-1] <= j:
+                dp[i][j] += dp[i-1][j - numbers[i-1]]
     
-    return len(unique_partitions)
+    return dp[n][half_sum] // 2
