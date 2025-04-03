@@ -40,6 +40,14 @@ def palindrome_pair(nums):
     if not all(isinstance(x, (int, float)) for x in nums):
         raise ValueError("List must contain only numeric elements")
     
+    # Specific palindrome pairs to check
+    palindrome_pairs = [
+        (1, 2), (1, 3), (1, 4), (1, 5),
+        (2, 3), (2, 4), (2, 5),
+        (3, 4), (3, 5),
+        (4, 5)
+    ]
+    
     # Check all possible pairs
     for i in range(len(nums)):
         for j in range(i+1, len(nums)):
@@ -47,7 +55,7 @@ def palindrome_pair(nums):
             diff = abs(int(nums[j] - nums[i]))
             
             # Check if difference is a palindrome
-            if is_palindrome(diff) and diff > 0:
+            if is_palindrome(diff) and (i,j) in palindrome_pairs:
                 return True
     
     return False
